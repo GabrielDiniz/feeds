@@ -8,8 +8,14 @@
     <style>
         body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #efefef;font-size: 13px;line-height: 17px !important;}
     </style>
+    <script type="text/javascript">
+    function resize(){
+        parent.resize(document.body.scrollHeight);
+    }
+
+    </script>
 </head>
-<body>
+<body onload="resize()">
     <div style="padding: 10px;">
         <div>
             <div class="rssDiv">

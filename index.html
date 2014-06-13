@@ -16,13 +16,12 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/scrolltop.js"></script>
     <script type="text/javascript">
-        function resize(len){
-            document.getElementById('feed').style.height = len+'px';
-        }
+        
         function toTop(){
             $('#btn-scroll').click();
         }
         $(function(){
+            $('#feed').css('height',document.body.scrollHeight-66)
             $('#inicio').click(function () {
                 $('#feed').attr('src','feed.html');
             });
@@ -49,7 +48,7 @@
 
     <div>
 
-        <iframe src="feed.html" width="100%" height="100%" scrolling="no" name="feed" id="feed" frameborder="0" marginheight="0" marginwidth="0" style=" width: 100%;height:100%; margin-top:50px">
+        <iframe src="feed.html" scrolling="yes" name="feed" id="feed" frameborder="0" marginheight="0" marginwidth="0" style="width:100%;margin-top:50px">
 
         </iframe>
     </div>

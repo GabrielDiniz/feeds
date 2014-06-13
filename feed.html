@@ -8,7 +8,23 @@
     <style>
         body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #efefef;font-size: 13px;line-height: 17px !important;}
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
+    <script type="text/javascript" src="js/FeedEk.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#divRss').FeedEk({
+                FeedUrl: 'http://pipes.yahoo.com/pipes/pipe.run?_id=18c56b01bca5d0a32399d0eb9e4e0cac&_render=rss',
+                MaxCount: 1000,
+                TitleLinkTarget:'_self'
+            });
+            setTimeout(function(){
+                $('a').on('click',function () {
+                    parent.toTop();
+                });
+            },2000);
+        });
+   
     function resize(){
         parent.resize(document.body.scrollHeight);
     }
@@ -26,18 +42,7 @@
             <div style="clear: both"></div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
-    <script type="text/javascript" src="js/FeedEk.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#divRss').FeedEk({
-                FeedUrl: 'http://pipes.yahoo.com/pipes/pipe.run?_id=18c56b01bca5d0a32399d0eb9e4e0cac&_render=rss',
-                MaxCount: 40,
-                TitleLinkTarget:'_self'
-            });
-        });
-    </script>
+    
 </body>
 
 </html>

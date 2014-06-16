@@ -18,7 +18,7 @@
     <author href="gabrieldiniz.com" email="contato@gabrieldiniz.com">
         Gabriel Diniz 
     </author>
-    <preference name="stay-in-webview" value="false" />
+    <preference name="stay-in-webview" value="true"/>
     <access origin="*" subdomains="true" browserOnly="true" />
     <feature name="http://api.phonegap.com/1.0/network"/> 
 </widget>

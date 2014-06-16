@@ -15,8 +15,9 @@
            // setTimeout(function(){
                 jQuery(document).on('click','#divRss a',function () {
                     
-                    $("#feed").hide();
-                    $("#container-noticia").show();
+                    url = encodeURI(this.href);
+                    window.open(url, '_system', 'location=yes');
+                    return false;
                 });
            // },1000);
         });

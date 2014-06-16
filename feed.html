@@ -1,14 +1,8 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="content-language" content="en" />
-    <title>FeedEk jQuery RSS/ATOM Feed Plugin Demo | jQuery RSS/ATOM Parser Plugin FeedEk Demo</title>
-    <link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
+﻿    <link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
     <style>
         body{font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;background-color: #efefef;font-size: 13px;line-height: 17px !important;}
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
     <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
     <script type="text/javascript" src="js/FeedEk.js"></script>
     <script type="text/javascript">
@@ -16,18 +10,19 @@
             $('#divRss').FeedEk({
                 FeedUrl: 'http://pipes.yahoo.com/pipes/pipe.run?_id=18c56b01bca5d0a32399d0eb9e4e0cac&_render=rss',
                 MaxCount: 1000,
-                TitleLinkTarget:'_self'
+                TitleLinkTarget:'noticia'
             });
-            setTimeout(function(){
-                $('a').on('click',function () {
-                    parent.toTop();
+           // setTimeout(function(){
+                jQuery(document).on('click','#divRss a',function () {
+                    
+                    $("#feed").hide();
+                    $("#container-noticia").show();
                 });
-            },2000);
+           // },1000);
         });
    
     </script>
-</head>
-<body>
+
     <div style="padding: 10px;">
         <div>
             <div class="rssDiv">
@@ -38,7 +33,3 @@
             <div style="clear: both"></div>
         </div>
     </div>
-    
-</body>
-
-</html>

@@ -18,7 +18,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scrolltop.js"></script>
-	<!-- <script type="text/javascript" src="js/cross-domain-ajax.js"></script>-->
+	
 	<script type="text/javascript">
 		function yql (url, callback) {
 			var query = 'select * from html where url="'+url+'" AND xpath=\'//div[@id="glb-materia"]\''
@@ -54,15 +54,13 @@
 		$(function(){
 			$('#inicio').click(function() {
 				$('#feed').FeedEk({
-					FeedUrl: 'http://pipes.yahoo.com/pipes/pipe.run?_id=18c56b01bca5d0a32399d0eb9e4e0cac&_render=rss',
+					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/corinthians/feed.rss',
 					MaxCount: 1000,
-					TitleLinkTarget:'noticia'
 				});
 			});
 			$('#feed').FeedEk({
-				FeedUrl: 'http://pipes.yahoo.com/pipes/pipe.run?_id=18c56b01bca5d0a32399d0eb9e4e0cac&_render=rss',
+				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/corinthians/feed.rss',
 				MaxCount: 1000,
-				TitleLinkTarget:'noticia'
 			});
 			jQuery(document).on('click','#feed a',function () {
 
@@ -76,7 +74,7 @@
 	</script>
 
 	<style type="text/css">
-		
+
 	</style>
 </head>
 <body>

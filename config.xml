@@ -8,7 +8,7 @@
     <!-- versionCode is optional and Android only -->
 
     <name>Notícias do Timão</name>
-
+    <icon src="icon.png"/>
     <description>
         Agregador de notícias sobre o Sport Clube Corinthians Paulista. 
     </description>

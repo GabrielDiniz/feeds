@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Notícias do Timão</name>
+    <name>Notícias do XXXXXXX</name>
     <icon src="icon.png"/>
     <description>
-        Agregador de notícias sobre o Sport Clube Corinthians Paulista. 
+        Agregador de notícias sobre o XXXXXXXXXXXXX. 
     </description>
     <gap:platform name="ios" />
     <gap:platform name="android" />

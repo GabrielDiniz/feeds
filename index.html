@@ -20,22 +20,7 @@
 	<script type="text/javascript" src="js/scrolltop.js"></script>
 	
 	<script type="text/javascript">
-		function yql (url, callback) {
-			var query = 'select * from html where url="'+url+'" AND xpath=\'//div[@id="glb-materia"]\''
-			var q = encodeURIComponent(query);
-			var yql = 'http://query.yahooapis.com/v1/public/yql?q='+q;
-			var retorno;
-			$.ajax({
-				type: "GET",
-				url: yql,
-				async: false,
-				dataType: "html",
-				success: function (xml) {
-					retorno = xml;
-				}
-			});
-			return retorno
-		}
+		
 		function titulo(data){
 			return $(data).find('.entry-title').html();
 		}
@@ -47,11 +32,12 @@
 			var dom = $(data).find('.materia-conteudo > div');
 			dom.find('.saibamais').remove();
 			dom.find('a').each(function () {
-				this.href='#'
+				this.href=''
 			});
 			return dom.html();
 		}
 		$(function(){
+			$("#loading").hide();
 			$('#inicio').click(function() {
 				$('#feed').FeedEk({
 					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/corinthians/feed.rss',
@@ -63,19 +49,38 @@
 				MaxCount: 1000,
 			});
 			jQuery(document).on('click','#feed a',function () {
-
-				var data = yql(this.href);
-				$('#feed').html('<h1>'+titulo(data)+'</h1>'+'<h2>'+descricao(data)+'</h2>'+noticia(data))
+				if (this.href!=location.href) {
+					$('#feed').hide();
+					$("#loading").show();
+					
+					var query = 'select * from html where url="'+this.href+'" AND xpath=\'//div[@id="glb-materia"]\''
+					var q = encodeURIComponent(query);
+					var yql = 'http://query.yahooapis.com/v1/public/yql?q='+q;
+					var retorno;
+					$.ajax({
+						type: "GET",
+						url: yql,
+						
+						dataType: "html",
+						success: function (data) {
+							$('#feed').html('<h1>'+titulo(data)+'</h1>'+'<h2>'+descricao(data)+'</h2>'+noticia(data));
+							$('#feed').show();
+							$("#loading").hide();
+							$('#btn-scroll').click();
+						}
+					});
+					
+					
+					
+					
+				};
 
 				return false
 			});
 			
 		});
-	</script>
+</script>
 
-	<style type="text/css">
-
-	</style>
 </head>
 <body>
 	<nav class="navbar navbar-default fixed" role="navigation">
@@ -86,7 +91,7 @@
 			</div>
 		</div>
 	</nav>
-
+	<img src="loader.gif" id="loading">
 	<div id="feed" class="rssDiv">
 
 

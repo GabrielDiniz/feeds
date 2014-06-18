@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Notícias do XXXXXXX</name>
+    <name>Notícias do Cruzeiro</name>
     <icon src="icon.png"/>
     <description>
-        Agregador de notícias sobre o XXXXXXXXXXXXX. 
+        Agregador de notícias sobre o Cruzeiro Esporte Clube. 
     </description>
     <gap:platform name="ios" />
     <gap:platform name="android" />

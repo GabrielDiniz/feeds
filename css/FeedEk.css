@@ -37,7 +37,7 @@
 .itemContent > br {
 	clear:both;
 }
-img, div{
+.foto, div{
 	width: 100% !important;
 	height: auto !important;
 }
@@ -57,6 +57,10 @@ img, div{
 }
 #feed{
 	margin-top: 50px;
+}
+#feed > img, #loading{
+	width: 20%;
+	margin: 50px 40%;
 }
 #container-noticia{
 	display: none;

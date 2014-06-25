@@ -20,7 +20,8 @@
 .itemTitle a{
 	font-weight:bold;
 	font-size: 17px;
-	color:#123 !important;
+	/***aki***/
+	color:#1a1 !important;
 	text-decoration:none 
 }
 .itemTitle a:hover{ 
@@ -45,7 +46,8 @@
 
 
 .itemContent > a > img{
-	border: 2px solid #123;
+	/***aki***/
+	border: 2px solid #1a1;
 	width: 70% !important;
 	margin: 10px 15%;
 

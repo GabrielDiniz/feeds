@@ -17,9 +17,10 @@
 .feedEkList li:last-child{
 	border-bottom:none;
 }
-.itemTitle a{
+a{
 	font-weight:bold;
 	font-size: 17px;
+	/***aki***/
 	color:#123 !important;
 	text-decoration:none 
 }
@@ -45,6 +46,7 @@
 
 
 .itemContent > a > img{
+	/***aki***/
 	border: 2px solid #123;
 	width: 70% !important;
 	margin: 10px 15%;
@@ -64,12 +66,6 @@
 #feed > img, #loading{
 	width: 20%;
 	margin: 50px 40%;
-<<<<<<< HEAD
-}
-#container-noticia{
-	display: none;
-=======
->>>>>>> master
 }
 #feed > img{
 	margin-top: 0;

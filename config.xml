@@ -7,10 +7,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Notícias da Seleção Brasileira</name>
+    <name>Notícias do Mengão</name>
     <icon src="icon.png"/>
     <description>
-        Agregador de notícias sobre a Seleção Brasileira. 
+        Agregador de notícias sobre o Clube Regatas do Flamengo. 
     </description>
     <gap:platform name="ios" />
     <gap:platform name="android" />

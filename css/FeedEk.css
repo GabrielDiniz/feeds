@@ -21,7 +21,7 @@ a{
 	font-weight:bold;
 	font-size: 17px;
 	/***aki***/
-	color:#1a1 !important;
+	color:#911221 !important;
 	text-decoration:none 
 }
 .itemTitle a:hover{ 
@@ -47,7 +47,7 @@ a{
 
 .itemContent > a > img{
 	/***aki***/
-	border: 2px solid #1a1;
+	border: 2px solid #911231 ;
 	width: 70% !important;
 	margin: 10px 15%;
 	border-radius: 3px;

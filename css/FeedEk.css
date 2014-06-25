@@ -17,7 +17,7 @@
 .feedEkList li:last-child{
 	border-bottom:none;
 }
- a{
+a{
 	font-weight:bold;
 	font-size: 17px;
 	/***aki***/
@@ -50,7 +50,6 @@
 	border: 2px solid #1039a2;
 	width: 70% !important;
 	margin: 10px 15%;
-
 	border-radius: 3px;
 }
 
@@ -62,14 +61,11 @@
 #feed{
 	margin-top: 50px;
 	background-color: #fff;
+	text-align: justify;
 }
 #feed > img, #loading{
 	width: 20%;
 	margin: 50px 40%;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 }
 #feed > img{
 	margin-top: 0;
@@ -82,7 +78,7 @@ h1 {
 	color: #444;
 	letter-spacing: -3px;
 	padding: 3px;
-
+	text-align: left;
 }
 h2 {
 	color: #999;

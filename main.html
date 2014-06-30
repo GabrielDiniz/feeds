@@ -109,17 +109,14 @@
 		$(function(){
 			document.addEventListener("deviceready", function() {
 				document.addEventListener("backbutton", function() {
-					alert('fui invocado');
 					if (isIn ==='noticia') {
-						alert('bora pro inicio');
 						$('#inicio').click(); 
 						return false;
 					} else{
-						alert('tenho que vazar');
+						navigator.app.exitApp();
 						return true;
 					}
-					alert('algo deu errado');
-				}, false);
+					false);
 			}, false);
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();

@@ -120,7 +120,7 @@
 			$("#loading").hide();
 			$('#inicio').click(function() {
 				$('#feed').FeedEk({
-					FeedUrl: 'http://gshow.globo.com/servico/semantica/editorias/plantao/programas/mais-voce/Receitas/feed.rss',
+					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss',
 					MaxCount: 1000,
 					success:function(feed){
 						window.scrollTo(x,y);
@@ -129,7 +129,7 @@
 				});
 			});
 			$('#feed').FeedEk({
-				FeedUrl: 'http://gshow.globo.com/servico/semantica/editorias/plantao/programas/mais-voce/Receitas',
+				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss',
 				MaxCount: 1000,
 				success:function(feed){
 					var itens= feed.find('.itemTitle a').each(function() {

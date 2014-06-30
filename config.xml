@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
+<<<<<<< HEAD
         id          = "com.santosfc.news"
         versionCode = "11" 
         version     = "1.0.1" >
+=======
+        id          = "com.selecaobrasileira.news"
+        versionCode = "12" 
+        version     = "1.0.2" >
+>>>>>>> master
 
     <!-- versionCode is optional and Android only -->
 

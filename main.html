@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/scrolltop.js"></script>
 	
 	<script type="text/javascript">
+	var isIn = 'feed';
 		var x = window.scrollX,
 		y = window.scrollY;
 		function titulo(data,site){
@@ -119,6 +120,7 @@
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {
+				isIn = 'feed';
 				$('#feed').FeedEk({
 					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/corinthians/feed.rss',
 					MaxCount: 1000,
@@ -168,6 +170,7 @@
 						$("#loading").hide();
 						window.scrollTo(0,0);
 					}
+					isIn = 'noticia';
 				};
 
 				return false

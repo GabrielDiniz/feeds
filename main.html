@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
 	<link href="css/FeedEk.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script>
+	<!-- <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-langs.min.js"></script> -->
 	<script type="text/javascript" src="js/FeedEk.js"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
@@ -21,24 +21,91 @@
 	
 	<script type="text/javascript">
 		var x = window.scrollX,
-			y = window.scrollY;
-		function titulo(data){
-			return $(data).find('.entry-title').html();
+		y = window.scrollY;
+		function titulo(data,site){
+			switch(site){
+				case 'ge':
+					return $(data).find('.entry-title').html();
+					break;
+				case 'ge-blog':
+					return $(data).find('h2 > a').html();
+					break;
+				default:
+					return '';
+			}
 		}
-		function descricao(data){
-			return $(data).find('.materia-titulo > h2').html();
+		function descricao(data,site){
+			switch(site){
+				case 'ge':
+					return $(data).find('.materia-titulo > h2').html();
+					break;
+				case 'ge-blog':
+					return '';
+					break;
+				default:
+					return 'Desculpe, houve um problema ao recuperar essa notícia';
+			}
 		}
-		function noticia(data){
-
-			var dom = $(data).find('.materia-conteudo > div');
+		function noticia(data,site){
+			var dom
+			switch(site){
+				case 'ge':
+					dom = $(data).find('.materia-conteudo > div');
+					break;
+				case 'ge-blog':
+					dom = $(data).find('span.conteudo-post');
+					data = '<div>';
+					dom.each(function() {data= data+$(this).html()});
+					dom = $(data+'</div>');
+			console.log(dom);
+					break;
+				default:
+					return '';
+			}
 			dom.find('.saibamais').remove();
+			dom.find('script').remove();
 			dom.find('a').each(function () {
 				this.href=''
 			});
 			return dom.html();
 		}
-		$(function(){
+		function executaYQL(href,callback){
+			var site,xpath;
+			if (href.indexOf('blogs/especial-blog')!=-1) {
+				site='ge-blog';
+				xpath = '//div[@id="glb-corpo"]';
+			} else if(href.indexOf('globoesporte.globo.com/futebol/') !=-1 || href.indexOf('sportv.globo.com/site/'!=-1))
+			{
+				site='ge';
+				xpath='//div[@id="glb-materia"]';
+			}
 			
+			var query = 'select * from html where url="'+href+'" AND xpath=\''+xpath+'\'';
+			var q = encodeURIComponent(query);
+			var yql = 'http://query.yahooapis.com/v1/public/yql?q='+q;
+			
+			$.ajax({
+				type: "GET",
+				url: yql,
+
+				dataType: "html",
+				success: function(data) {
+					callback(data,site);
+				}
+				
+			});
+		}
+		function gravaNoticia(href){
+			executaYQL(href,function(data,site) {
+				localStorage.setItem(href,JSON.stringify({
+					titulo:titulo(data,site),
+					descricao:descricao(data,site),
+					noticia:noticia(data,site)
+				}))
+			});
+		}
+		$(function(){
+			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {
 				$('#feed').FeedEk({
@@ -53,35 +120,43 @@
 			$('#feed').FeedEk({
 				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/sao-paulo/feed.rss',
 				MaxCount: 1000,
+				success:function(feed){
+					var itens= feed.find('.itemTitle a').each(function() {
+						if (localStorage.getItem(this.href) === null) {
+							gravaNoticia(this.href);
+						} 
+					});
+				}
 			});
 			jQuery(document).on('click','#feed a',function () {
+				var objNoticia;
 				if (this.href!=location.href) {
 					// get scroll position
 					x = window.scrollX;
 					y = window.scrollY;
 					$('#feed').hide();
 					$("#loading").show();
-					
-					var query = 'select * from html where url="'+this.href+'" AND xpath=\'//div[@id="glb-materia"]\''
-					var q = encodeURIComponent(query);
-					var yql = 'http://query.yahooapis.com/v1/public/yql?q='+q;
-					var retorno;
-					$.ajax({
-						type: "GET",
-						url: yql,
-						
-						dataType: "html",
-						success: function (data) {
-							$('#feed').html('<h1>'+titulo(data)+'</h1>'+'<h2>'+descricao(data)+'</h2>'+noticia(data));
+					if ( localStorage.getItem(this.href) ===null) {
+						href = this.href;
+						executaYQL(this.href,function(data,site){
+							localStorage.setItem(href,JSON.stringify({
+								titulo: titulo(data,site),
+								descricao: descricao(data,site),
+								noticia: noticia(data,site)
+							}))
+							$('#feed').html('<h1>'+titulo(data,site)+'</h1>'+'<h2>'+descricao(data,site)+'</h2>'+noticia(data,site));
 							$('#feed').show();
 							$("#loading").hide();
-							$('#btn-scroll').click();
-						}
-					});
-					
-					
-					
-					
+							window.scrollTo(0,0);
+						});
+					}else{
+
+						objNoticia = JSON.parse(localStorage.getItem(this.href))	;
+						$('#feed').html('<h1>'+objNoticia.titulo+'</h1>'+'<h2>'+objNoticia.descricao+'</h2>'+objNoticia.noticia);
+						$('#feed').show();
+						$("#loading").hide();
+						window.scrollTo(0,0);
+					}
 				};
 
 				return false

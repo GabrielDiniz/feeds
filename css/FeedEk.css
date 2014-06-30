@@ -39,12 +39,13 @@ a{
 .itemContent > br {
 	clear:both;
 }
-.foto,.foto > img, div{
+.ed-foto,.foto,.foto > img, div{
 	width: 100% !important;
 	height: auto !important;
 }
-
-
+.ed-foto{
+	margin: 0 !important;
+}
 .itemContent > a > img{
 	/***aki***/
 	border: 2px solid #c11122;

@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-language" content="en" />
 	<title>Notícias do Cruzeiro</title>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
@@ -105,6 +106,16 @@
 			});
 		}
 		$(function(){
+			document.addEventListener("deviceready", function() {
+				document.addEventListener("backbutton", function() {
+					if (isIn ==='noticia') {
+						$('#inicio').click(); 
+						return false;
+					} else{
+						return true;
+					}
+				}, false);
+			}, false);
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {

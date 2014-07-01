@@ -3,7 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-language" content="en" />
+
 	<title>Notícias do Santos</title>
+
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -123,7 +125,9 @@
 			$('#inicio').click(function() {
 				isIn = 'feed';
 				$('#feed').FeedEk({
+
 					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/santos/feed.rss',
+
 					MaxCount: 1000,
 					success:function(feed){
 						window.scrollTo(x,y);
@@ -137,7 +141,9 @@
 				});
 			});
 			$('#feed').FeedEk({
+
 				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/santos/feed.rss',
+
 				MaxCount: 1000,
 				success:function(feed){
 					feed.find('.itemTitle a').each(function() {

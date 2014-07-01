@@ -5,7 +5,6 @@
         versionCode = "12" 
         version     = "1.0.2" >
 
-
     <!-- versionCode is optional and Android only -->
 
     <name>Notícias do Cruzeiro</name>
@@ -13,13 +12,22 @@
     <description>
         Agregador de notícias sobre o Cruzeiro Esporte Clube. 
     </description>
-   <!-- <gap:platform name="ios" /> -->
+    <!-- <gap:platform name="ios" /> -->
     <gap:platform name="android" />
     <!-- <gap:platform name="winphone" /> -->
     <author href="gabrieldiniz.com" email="contato@gabrieldiniz.com">
         Gabriel Diniz 
     </author>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.InAppBrowser" />
+    </feature>
+    <feature name="App">
+        <param name="android-package" value="org.apache.cordova.App" />
+    </feature>
+
+    <preference name="target-device" value="universal" />
     <preference name="stay-in-webview" value="true"/>
     <access origin="*" subdomains="true" browserOnly="true" />
-    <feature name="http://api.phonegap.com/1.0/network"/> 
+
 </widget>

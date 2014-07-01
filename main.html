@@ -111,6 +111,7 @@
 		$(function(){
 			
 			document.addEventListener("deviceready", function() {
+				window.plugin.notification.local.add({ message: 'Great app!' });
 				document.addEventListener("backbutton", function() {
 					alert('fui invocado');
 					if (isIn ==='noticia') {

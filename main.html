@@ -109,6 +109,7 @@
 			});
 		}
 		$(function(){
+			
 			document.addEventListener("deviceready", function() {
 				document.addEventListener("backbutton", function() {
 					if (isIn ==='noticia') {
@@ -118,8 +119,9 @@
 						navigator.app.exitApp();
 						return true;
 					}
-					false);
+				}, false);
 			}, false);
+
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {

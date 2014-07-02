@@ -3,7 +3,7 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.selecaobrasileira.news"
 
-    versionCode = "0" 
+    versionCode = "14" 
     version     = "1.0.3" 
 >
 

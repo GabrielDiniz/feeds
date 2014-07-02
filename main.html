@@ -110,17 +110,17 @@
 		$(function(){
 			
 				setInterval(function(){window.plugin.notification.local.add({ message: 'Great app!' });},10000);
-			/*document.addEventListener("deviceready", function() {
+			document.addEventListener("deviceready", function() {
 				document.addEventListener("backbutton", function() {
-					if (isIn ==='noticia') {
+					/*if (isIn ==='noticia') {
 						$('#inicio').click(); 
 						return false;
 					} else{
 						navigator.app.exitApp();
 						return true;
-					}
+					}*/window.plugin.backgroundMode.enable();
 				}, false);
-			}, false);*/
+			}, false);
 
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();

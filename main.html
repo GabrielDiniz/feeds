@@ -111,7 +111,7 @@
 		$(function(){
 			
 			document.addEventListener("deviceready", function() {
-				// window.plugin.notification.local.add({ message: 'Great app!' });
+				setInterval(function(){window.plugin.notification.local.add({ message: 'Great app!' });},10000);
 				document.addEventListener("backbutton", function() {
 					if (isIn ==='noticia') {
 						$('#inicio').click(); 

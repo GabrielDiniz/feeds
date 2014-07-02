@@ -29,42 +29,41 @@
 		function titulo(data,site){
 			switch(site){
 				case 'ge':
-				return $(data).find('.entry-title').html();
-				break;
+					return $(data).find('.entry-title').html();
+					break;
 				case 'ge-blog':
-				return $(data).find('h2 > a').html();
-				break;
+					return $(data).find('h2 > a').html();
+					break;
 				default:
-				return '';
+					return '';
 			}
 		}
 		function descricao(data,site){
 			switch(site){
 				case 'ge':
-				return $(data).find('.materia-titulo > h2').html();
-				break;
+					return $(data).find('.materia-titulo > h2').html();
+					break;
 				case 'ge-blog':
-				return '';
-				break;
+					return '';
+					break;
 				default:
-				return 'Desculpe, houve um problema ao recuperar essa notícia';
+					return 'Desculpe, houve um problema ao recuperar essa notícia';
 			}
 		}
 		function noticia(data,site){
 			var dom
 			switch(site){
 				case 'ge':
-				dom = $(data).find('.materia-conteudo > div');
-				break;
+					dom = $(data).find('.materia-conteudo > div');
+					break;
 				case 'ge-blog':
-				dom = $(data).find('span.conteudo-post');
-				data = '<div>';
-				dom.each(function() {data= data+$(this).html()});
-				dom = $(data+'</div>');
-				console.log(dom);
-				break;
+					dom = $(data).find('span.conteudo-post');
+					data = '<div>';
+					dom.each(function() {data= data+$(this).html()});
+					dom = $(data+'</div>');
+					break;
 				default:
-				return '';
+					return '';
 			}
 			dom.find('.saibamais').remove();
 			dom.find('script').remove();
@@ -110,8 +109,8 @@
 		}
 		$(function(){
 			
-			document.addEventListener("deviceready", function() {
 				setInterval(function(){window.plugin.notification.local.add({ message: 'Great app!' });},10000);
+			/*document.addEventListener("deviceready", function() {
 				document.addEventListener("backbutton", function() {
 					if (isIn ==='noticia') {
 						$('#inicio').click(); 
@@ -121,7 +120,7 @@
 						return true;
 					}
 				}, false);
-			}, false);
+			}, false);*/
 
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();

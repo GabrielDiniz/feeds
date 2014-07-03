@@ -25,7 +25,8 @@
 	<script type="text/javascript">
 		var feedUrl = 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss';
 		var x = window.scrollX,
-		y = window.scrollY;
+		y = window.scrollY,
+		isIn;
 		function titulo(data,site){
 			switch(site){
 				case 'ge':
@@ -100,14 +101,15 @@
 		}
 		function gravaNoticia(href,notify){
 			executaYQL(href,function(data,site) {
+				var t =titulo(data,site);
 				localStorage.setItem(href,JSON.stringify({
-					titulo:titulo(data,site),
+					titulo:t,
 					descricao:descricao(data,site),
 					noticia:noticia(data,site)
 				}));
 				if (notify) {
 					// alert(titulo(data,site));
-					window.plugin.notification.local.add({ message: titulo(data,site) });
+					window.plugin.notification.local.add({ message: t });
 				};
 			});
 		}
@@ -122,7 +124,15 @@
 			});
 		}
 		$(function(){
-			
+			document.addEventListener("deviceready", function() {
+				
+				document.addEventListener("backbutton", function() {
+					if (isIn ==='noticia') {
+						$('#inicio').click(); 
+						return false;
+					} 
+				}, false);
+			}, false);
 			setInterval(function(){
 				
 				loadFeed('#fakefeed',function(feed) {
@@ -131,7 +141,7 @@
 							gravaNoticia(this.href,true);
 						}else{
 							// alert('nenhuma noticia nova');
-							window.plugin.notification.local.add({ message: 'nenhuma noticia nova' });
+							// window.plugin.notification.local.add({ message: 'nenhuma noticia nova' });
 						} 
 					});
 				},1);
@@ -141,6 +151,7 @@
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {
+				isIn = 'feed';
 				document.addEventListener("backbutton", function() {}, false);
 				loadFeed('#feed',function(feed){
 						window.scrollTo(x,y);
@@ -153,6 +164,7 @@
 					});
 			});
 			loadFeed('#feed',function(feed){
+				isIn='feed';
 					feed.find('.itemTitle a').each(function() {
 						if (localStorage.getItem(this.href) === null) {
 							gravaNoticia(this.href);
@@ -160,6 +172,7 @@
 					});
 				});
 			jQuery(document).on('click','#feed a',function () {
+				isIn = 'noticia';
 				var objNoticia;
 				if (this.href!=location.href) {
 					// get scroll position
@@ -188,7 +201,7 @@
 						$("#loading").hide();
 						window.scrollTo(0,0);
 					}
-					document.addEventListener("backbutton", $('#inicio').click, false);
+					
 				};
 
 				return false

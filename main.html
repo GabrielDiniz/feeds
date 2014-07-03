@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/scrolltop.js"></script>
 	
 	<script type="text/javascript">
-		
+		var feedUrl = 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss';
 		var x = window.scrollX,
 		y = window.scrollY;
 		function titulo(data,site){
@@ -98,30 +98,53 @@
 				
 			});
 		}
-		function gravaNoticia(href){
+		function gravaNoticia(href,notify){
 			executaYQL(href,function(data,site) {
 				localStorage.setItem(href,JSON.stringify({
 					titulo:titulo(data,site),
 					descricao:descricao(data,site),
 					noticia:noticia(data,site)
-				}))
+				}));
+				if (notify) {
+					// alert(titulo(data,site));
+					window.plugin.notification.local.add({ message: titulo(data,site) });
+				};
+			});
+		}
+		function loadFeed (id,callback,maxCount) {
+
+			if (!maxCount) {
+				maxCount = 100;
+			}
+			$(id).FeedEk({
+				FeedUrl: feedUrl,
+				MaxCount: maxCount,
+				success:callback
 			});
 		}
 		$(function(){
 			
-			setInterval(function(){window.plugin.notification.local.add({ message: 'Great app!' });},10000);
+			setInterval(function(){
+				
+				loadFeed('#fakefeed',function(feed) {
+					feed.find('.itemTitle a').each(function() {
+						if (localStorage.getItem(this.href) === null) {
+							gravaNoticia(this.href,true);
+						}else{
+							// alert('nenhuma noticia nova');
+							window.plugin.notification.local.add({ message: 'nenhuma noticia nova' });
+						} 
+					});
+				},1);
+				
+			},600000);
 			
 
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {
 				document.addEventListener("backbutton", function() {}, false);
-				$('#feed').FeedEk({
-
-					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss',
-
-					MaxCount: 1000,
-					success:function(feed){
+				loadFeed('#feed',function(feed){
 						window.scrollTo(x,y);
 						x=y=0;
 						feed.find('.itemTitle a').each(function() {
@@ -129,22 +152,15 @@
 								gravaNoticia(this.href);
 							} 
 						});
-					}
-				});
+					});
 			});
-			$('#feed').FeedEk({
-
-				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss',
-				
-				MaxCount: 1000,
-				success:function(feed){
+			loadFeed('#feed',function(feed){
 					feed.find('.itemTitle a').each(function() {
 						if (localStorage.getItem(this.href) === null) {
 							gravaNoticia(this.href);
 						} 
 					});
-				}
-			});
+				});
 			jQuery(document).on('click','#feed a',function () {
 				var objNoticia;
 				if (this.href!=location.href) {
@@ -212,6 +228,6 @@
 		</div>
 
 	</div>
-	
+	<div id="fakefeed" style="display:none"></div>
 </body>
 </html>

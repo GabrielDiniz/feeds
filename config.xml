@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.selecaobrasileira.news"
+    id          = "com.gdcinema.news"
 
     versionCode = "14" 
     version     = "1.0.3" 
@@ -9,10 +9,10 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Notícias da Seleção Brasileira</name>
+    <name>Tudo Sobre Cinema</name>
     <icon src="icon.png"/>
     <description>
-        Agregador de notícias sobre a Seleção Brasileira. 
+        Novidades em tempo real sobre Cinema e filmes 
     </description>
     <!-- <gap:platform name="ios" /> -->
     <gap:platform name="android" />

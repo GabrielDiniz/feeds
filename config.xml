@@ -3,8 +3,8 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.cruzreiro.news"
 
-    versionCode = "14" 
-    version     = "1.0.3" 
+    versionCode = "15" 
+    version     = "1.0.4" 
 >
 
     <!-- versionCode is optional and Android only -->
@@ -30,8 +30,14 @@
 
     <preference name="target-device" value="universal" />
     <preference name="stay-in-webview" value="true"/>
+    <preference name="keepRunning" value="true" />
     <access origin="*" subdomains="true" browserOnly="true" />
 
     <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
     <gap:plugin name="cn.push.cordova.plugin.local-notification" version="0.7.3" />
+<<<<<<< HEAD
 </widget>
+=======
+    <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" />
+</widget>
+>>>>>>> master

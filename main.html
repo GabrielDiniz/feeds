@@ -151,7 +151,6 @@
 			$("#loading").hide();
 			$('#inicio').click(function() {
 				isIn = 'feed';
-				document.addEventListener("backbutton", function() {}, false);
 				loadFeed('#feed',function(feed){
 						window.scrollTo(x,y);
 						x=y=0;
@@ -163,13 +162,13 @@
 					});
 			});
 			loadFeed('#feed',function(feed){
-			isIn='feed';
-					feed.find('.itemTitle a').each(function() {
-						if (localStorage.getItem(this.href) === null) {
-							gravaNoticia(this.href);
-						} 
-					});
+				isIn='feed';
+				feed.find('.itemTitle a').each(function() {
+					if (localStorage.getItem(this.href) === null) {
+						gravaNoticia(this.href);
+					} 
 				});
+			});
 			jQuery(document).on('click','#feed a',function () {
 				isIn = 'noticia';
 				var objNoticia;

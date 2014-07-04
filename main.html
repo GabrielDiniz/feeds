@@ -23,7 +23,11 @@
 	<script type="text/javascript" src="js/scrolltop.js"></script>
 	
 	<script type="text/javascript">
+
+
 		var feedUrl = 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/selecao-brasileira/feed.rss';
+
+
 		var x = window.scrollX,
 		y = window.scrollY,
 		isIn;
@@ -108,7 +112,6 @@
 					noticia:noticia(data,site)
 				}));
 				if (notify) {
-					// alert(titulo(data,site));
 					window.plugin.notification.local.add({ message: t });
 				};
 			});
@@ -125,7 +128,6 @@
 		}
 		$(function(){
 			document.addEventListener("deviceready", function() {
-				
 				document.addEventListener("backbutton", function() {
 					if (isIn ==='noticia') {
 						$('#inicio').click(); 
@@ -139,10 +141,7 @@
 					feed.find('.itemTitle a').each(function() {
 						if (localStorage.getItem(this.href) === null) {
 							gravaNoticia(this.href,true);
-						}else{
-							// alert('nenhuma noticia nova');
-							// window.plugin.notification.local.add({ message: 'nenhuma noticia nova' });
-						} 
+						}
 					});
 				},1);
 				

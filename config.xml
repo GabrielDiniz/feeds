@@ -4,7 +4,7 @@
     id          = "com.selecaobrasileira.news"
 
     versionCode = "15" 
-    version     = "1.0.3" 
+    version     = "1.0.4" 
 >
 
     <!-- versionCode is optional and Android only -->

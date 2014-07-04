@@ -23,48 +23,52 @@
 	<script type="text/javascript" src="js/scrolltop.js"></script>
 	
 	<script type="text/javascript">
-		var isIn = 'feed';
+
+
+		var feedUrl = 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/atletico-mg/feed.rss';
+
+
 		var x = window.scrollX,
-		y = window.scrollY;
+		y = window.scrollY,
+		isIn;
 		function titulo(data,site){
 			switch(site){
 				case 'ge':
-				return $(data).find('.entry-title').html();
-				break;
+					return $(data).find('.entry-title').html();
+					break;
 				case 'ge-blog':
-				return $(data).find('h2 > a').html();
-				break;
+					return $(data).find('h2 > a').html();
+					break;
 				default:
-				return '';
+					return '';
 			}
 		}
 		function descricao(data,site){
 			switch(site){
 				case 'ge':
-				return $(data).find('.materia-titulo > h2').html();
-				break;
+					return $(data).find('.materia-titulo > h2').html();
+					break;
 				case 'ge-blog':
-				return '';
-				break;
+					return '';
+					break;
 				default:
-				return 'Desculpe, houve um problema ao recuperar essa notícia';
+					return 'Desculpe, houve um problema ao recuperar essa notícia';
 			}
 		}
 		function noticia(data,site){
 			var dom
 			switch(site){
 				case 'ge':
-				dom = $(data).find('.materia-conteudo > div');
-				break;
+					dom = $(data).find('.materia-conteudo > div');
+					break;
 				case 'ge-blog':
-				dom = $(data).find('span.conteudo-post');
-				data = '<div>';
-				dom.each(function() {data= data+$(this).html()});
-				dom = $(data+'</div>');
-				console.log(dom);
-				break;
+					dom = $(data).find('span.conteudo-post');
+					data = '<div>';
+					dom.each(function() {data= data+$(this).html()});
+					dom = $(data+'</div>');
+					break;
 				default:
-				return '';
+					return '';
 			}
 			dom.find('.saibamais').remove();
 			dom.find('script').remove();
@@ -99,40 +103,56 @@
 				
 			});
 		}
-		function gravaNoticia(href){
+		function gravaNoticia(href,notify){
 			executaYQL(href,function(data,site) {
+				var t =titulo(data,site);
 				localStorage.setItem(href,JSON.stringify({
-					titulo:titulo(data,site),
+					titulo:t,
 					descricao:descricao(data,site),
 					noticia:noticia(data,site)
-				}))
+				}));
+				if (notify) {
+					window.plugin.notification.local.add({ message: t });
+				};
+			});
+		}
+		function loadFeed (id,callback,maxCount) {
+			if (!maxCount) {
+				maxCount = 100;
+			}
+			$(id).FeedEk({
+				FeedUrl: feedUrl,
+				MaxCount: maxCount,
+				success:callback
 			});
 		}
 		$(function(){
-			
 			document.addEventListener("deviceready", function() {
-				// window.plugin.notification.local.add({ message: 'Great app!' });
 				document.addEventListener("backbutton", function() {
 					if (isIn ==='noticia') {
 						$('#inicio').click(); 
 						return false;
-					} else{
-						navigator.app.exitApp();
-						return true;
-					}
+					} 
 				}, false);
 			}, false);
-
+			setInterval(function(){
+				
+				loadFeed('#fakefeed',function(feed) {
+					feed.find('.itemTitle a').each(function() {
+						if (localStorage.getItem(this.href) === null) {
+							gravaNoticia(this.href,true);
+						}
+					});
+				},1);
+				
+			},600000);
+			
 			jQuery(document).on('click','a',function() {return false});
 			$("#loading").hide();
 			$('#inicio').click(function() {
 				isIn = 'feed';
-				$('#feed').FeedEk({
-
-					FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/atletico-mg/feed.rss',
-
-					MaxCount: 1000,
-					success:function(feed){
+				document.addEventListener("backbutton", function() {}, false);
+				loadFeed('#feed',function(feed){
 						window.scrollTo(x,y);
 						x=y=0;
 						feed.find('.itemTitle a').each(function() {
@@ -140,23 +160,18 @@
 								gravaNoticia(this.href);
 							} 
 						});
-					}
-				});
+					});
 			});
-			$('#feed').FeedEk({
-
-				FeedUrl: 'http://globoesporte.globo.com/servico/semantica/editorias/plantao/futebol/times/atletico-mg/feed.rss',
-
-				MaxCount: 1000,
-				success:function(feed){
+			loadFeed('#feed',function(feed){
+			isIn='feed';
 					feed.find('.itemTitle a').each(function() {
 						if (localStorage.getItem(this.href) === null) {
 							gravaNoticia(this.href);
 						} 
 					});
-				}
-			});
+				});
 			jQuery(document).on('click','#feed a',function () {
+				isIn = 'noticia';
 				var objNoticia;
 				if (this.href!=location.href) {
 					// get scroll position
@@ -185,7 +200,7 @@
 						$("#loading").hide();
 						window.scrollTo(0,0);
 					}
-					isIn = 'noticia';
+					
 				};
 
 				return false
@@ -223,6 +238,6 @@
 		</div>
 
 	</div>
-	
+	<div id="fakefeed" style="display:none"></div>
 </body>
 </html>

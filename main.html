@@ -213,7 +213,7 @@
 					y = window.scrollY;
 					$('#feed').hide();
 					$("#loading").show();
-					if ( localStorage.getItem(this.href) ===null) {
+					if ( localStorage.getItem(this.href) === null || localStorage.getItem(this.href).titulo === undefined) {
 						href = this.href;
 						executaYQL(this.href,function(data,site){
 							localStorage.setItem(href,JSON.stringify({

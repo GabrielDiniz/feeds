@@ -59,7 +59,10 @@
 					return $(data).find('h2 > a').html();
 					break;
 				case 'galeria-globo':
-					return $(data).find('.galeria-titulo > h1').html();;
+					return $(data).find('.galeria-titulo > h1').html();
+					break;
+				case 'techtudo':
+					return $(data).find('.materia-titulo').html();
 					break;
 				default:
 					return '';
@@ -69,6 +72,9 @@
 			switch(site){
 				case 'ge':
 					return $(data).find('.materia-titulo > h2').html();
+					break;
+				case 'techtudo':
+					return $(data).find('.materia-assinatura-letra').html();
 					break;
 				case 'ge-blog':
 					return '';
@@ -85,6 +91,9 @@
 			switch(site){
 				case 'ge':
 					dom = $(data).find('.materia-conteudo > div');
+					break;
+				case 'techtudo':
+					dom = $(data).find('.container > .corpo-conteudo');
 					break;
 				case 'ge-blog':
 					dom = $(data).find('span.conteudo-post');
@@ -118,7 +127,12 @@
 			} else if(href.indexOf('.globo.com/') !=-1 && href.indexOf('/fotos/')!=-1){
 				site='galeria-globo';
 				xpath='//body';
-			} else if(href.indexOf('globoesporte.globo.com/') !=-1 || href.indexOf('sportv.globo.com/'!=-1))
+			} else if(href.indexOf('techtudo.com') !=-1)
+			{
+				site='techtudo';
+				xpath='//div[@id="conteudo"]/div';
+			
+			}else if(href.indexOf('globoesporte.globo.com/') !=-1 || href.indexOf('sportv.globo.com/'!=-1))
 			{
 				site='ge';
 				xpath='//div[@id="glb-materia"]';

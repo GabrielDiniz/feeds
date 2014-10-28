@@ -59,8 +59,10 @@ a{
 	top: 0; 
 	width: 100%;
 }
-#feed{
+.ad{
 	margin-top: 50px;
+}
+#feed{
 	background-color: #fff;
 	text-align: justify;
 }

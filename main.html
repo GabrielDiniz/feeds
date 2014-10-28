@@ -209,7 +209,10 @@
 								gravaNoticia(this.href);
 							} 
 						});
-						$("#feed").append('<script type="text/javascript" src="http://ad.leadboltmobile.net/show_app_ad.js?section_id=794850968"></script>');
+						var s = document.createElement("script");
+						s.type = "text/javascript";
+						s.src = "http://ad.leadboltmobile.net/show_app_ad.js?section_id=794850968";
+						$("#feed").append(s);
 					});
 			});
 			loadFeed('#feed',function(feed){
@@ -219,7 +222,10 @@
 						gravaNoticia(this.href);
 					} 
 				});
-				$("#feed").append('<script type="text/javascript" src="http://ad.leadboltmobile.net/show_app_ad.js?section_id=794850968"></script>');
+				var s = document.createElement("script");
+				s.type = "text/javascript";
+				s.src = "http://ad.leadboltmobile.net/show_app_ad.js?section_id=794850968";
+				$("#feed").append(s);
 			});
 			jQuery(document).on('click','#feed a',function () {
 				isIn = 'noticia';

@@ -31,7 +31,5 @@
     <preference name="target-device" value="universal" />
     <preference name="stay-in-webview" value="true"/>
     <preference name="keepRunning" value="true" />
-    <access origin="*" subdomains="true" browserOnly="true" />
-    <gap:plugin name="cn.push.cordova.plugin.local-notification" version="0.7.3" />
-    <gap:plugin name="cordova-plugin-background-mode" version="0.5.0" />
+    <access origin="*" subdomains="true" browserOnly="true" />    
 </widget>

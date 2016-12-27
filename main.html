@@ -152,7 +152,7 @@
 				
 			});
 		}
-		function gravaNoticia(href,notify){
+		function gravaNoticia(href){
 			executaYQL(href,function(data,site) {
 				var t =titulo(data,site);
 				localStorage.setItem(href,JSON.stringify({
@@ -160,9 +160,6 @@
 					descricao:descricao(data,site),
 					noticia:noticia(data,site)
 				}));
-				if (notify) {
-					window.plugin.notification.local.add({ message: t });
-				};
 			});
 		}
 		function loadFeed (id,callback,maxCount) {
@@ -190,7 +187,7 @@
 				loadFeed('#fakefeed',function(feed) {
 					feed.find('.itemTitle a').each(function() {
 						if (localStorage.getItem(this.href) === null) {
-							gravaNoticia(this.href,true);
+							gravaNoticia(this.href);
 						}
 					});
 				},1);
